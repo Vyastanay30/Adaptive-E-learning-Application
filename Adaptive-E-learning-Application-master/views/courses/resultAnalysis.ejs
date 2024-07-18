@@ -1,0 +1,58 @@
+<% include ../partials/header %>
+<div class="container">
+  <!--Panel-->
+  <% result.forEach((r,index)=>{ %>
+  <div class="card mt-3 px-1 py-1 border-primary">
+    <h5 class="card-header h5">
+      <%= r.question.questionDescription %>
+    </h5>
+    <div class="card-body">
+      <ul class="list-group">
+        <% r.question.options.forEach((o,index)=>{ %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <%= o %> <% if(o == r.answer && o == r.user_answer){ %>
+          <span class="badge badge-success badge-pill">Correct Answer Well Done</span>
+          <% } else{ %> <% if(o == r.answer){ %>
+          <span class="badge badge-success badge-pill">Correct</span>
+          <% } %> <% if(o == r.user_answer){ %>
+          <span class="badge badge-danger badge-pill">Your choice</span>
+          <% } %> <% } %>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+    <% if (recommendations['question' + index].length > 0) {%>
+
+    <div class="row justify-content-md-center">
+      <div class="col-6">
+        <div class="card ml-2 mb-2">
+          <div class="card-body">
+            <h5 class="card-title">Recommendations</h5>
+            <p class="card-text">Looks like your concepts for the above question are not clear! Here are a few links to
+              help you out! </p>
+            <ul class="list-group list-group-flush">
+              <% recommendations['question' + index].forEach((url,ind)=>{ %>
+              <li class="list-group-item"><a href="<%= url %>"
+                  target="_blank"><%= titles['question' + index][ind] %></a></li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card ml-2 mb-2">
+          <div class="card-body">
+            <h5 class="card-title">More Practice Questions</h5>
+            <p class="card-text"><a href="/courses/<%= course_id%>/<%= moduleId%>/quiz/qid/<%= index%>">Try out these
+                questions to improve your skills</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+  <% }) %>
+
+  <a href="/courses/<%= course_id %>" class="btn btn-primary btn-lg">Go Back</a>
+</div>
+<%include ../partials/footer %>

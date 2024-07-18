@@ -1,0 +1,34 @@
+<% include ../partials/header %>
+<div class="container">
+	<div class="row justify-content-md-center">
+		<div class="col-8">
+			<h1 class="text-centre h1 ml-4 mt-2">Final Quiz</h1>
+			<form action="/courses/<%=course_id%>/<%= moduleId %>/quiz" method="POST" id="quiz">
+				<ol style="list-style-type:none !important">
+					<% test.forEach((question,index)=>{ %>
+					<li>
+						<div class="form-group">
+							<label for="exampleSelect1" class="bmd-label-floating">
+								<h4><%= index+1 %>. <%= question.questionDescription %></h4>
+							</label>
+							<select class="form-control" name="question<%= index %>" id="exampleSelect1">
+								<option value="0"><%= question.options[0] %></option>
+								<option value="1"><%= question.options[1] %></option>
+								<option value="2"><%= question.options[2] %></option>
+								<option value="3"><%= question.options[3] %></option>
+							</select>
+						</div>
+						<hr>
+					</li>
+					<% }) %>
+				</ol>
+				<input type="submit" class="btn btn-raised btn-success ml-5" value="Submit Quiz" />
+
+			</form>
+		</div>
+	</div>
+
+
+</div>
+
+<% include ../partials/footer %>

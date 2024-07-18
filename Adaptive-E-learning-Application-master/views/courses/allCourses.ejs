@@ -1,0 +1,82 @@
+<% include ../partials/header %>
+
+<br>
+<div class="container">
+    <div class="row">
+        <% allCourses.forEach((course)=>{ %>
+        <div class="col-md-4 col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    <%= course.courseName.toUpperCase() %>
+                </div>
+                <img src="https://prod-discovery.edx-cdn.org/media/course/image/4c70ad9b-9602-49af-bf00-83fa4bf47708-2a3458199b6b.small.jpg"
+                    class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text"><%= course.description %></p>
+                    <blockquote class="blockquote mb-0">
+                        <footer class="blockquote-footer">Created by <%= course.creator %> </footer>
+                    </blockquote>
+                    <% if(currentUser && currentUser.courses.length > 0){ %>
+                    <% currentUser.courses.forEach(c=>{ %>
+                    <% if(course._id.equals(c.id)){ %>
+                    <a href="/courses/<%= course._id %>" class="btn btn-primary">Proceed To Course</a>
+                    <% }else{ %>
+                    <p><%= course._id %> <%= c.id %></p>
+                    <a href="/courses/<%= course._id %>/survey" class="btn btn-primary">Enroll</a>
+                    <% } %>
+                    <% }) %>
+                    <% }else if(currentUser && currentUser.courses.length === 0 ){ %>
+                    <a href="/courses/<%= course._id %>/survey" class="btn btn-primary">Enroll</a>
+                    <% }else{ %>
+                    <a href="/login" class="btn btn-primary">Enroll</a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+        <div class="col-md-4 col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    JavaScript
+                </div>
+                <img src="https://cdn-images-1.medium.com/max/1600/1*zWhOGf_PgX0nRTLZLmFpGg.png" class="card-img-top"
+                    alt="...">
+                <div class="card-body">
+                    <p class="card-text">JavaScript (JS) is a lightweight, interpreted or JIT compiled programming
+                        language with first-class functions...</p>
+                    <blockquote class="blockquote mb-0">
+                        <footer class="blockquote-footer">Created by Brad Traversy </footer>
+                    </blockquote>
+                    <a href="#" class="btn btn-primary">Enroll</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    Java
+                </div>
+                <img src="https://fossbytes.com/wp-content/uploads/2018/09/java-11.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Java is a general-purpose computer-programming language that is concurrent,
+                        class-based, object-oriented...</p>
+                    <blockquote class="blockquote mb-0">
+                        <footer class="blockquote-footer">Created by Tim Buchalka </footer>
+                    </blockquote>
+                    <a href="#" class="btn btn-primary">Enroll</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<% include ../partials/footer %>
